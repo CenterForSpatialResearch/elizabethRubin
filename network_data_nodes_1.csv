@@ -1,0 +1,32 @@
+chapter,label,type,x,y
+1,Kim Barker,person,7,3
+2,Scott Shadian,person,7,1
+3,Blumenthal,person,8,2
+4,Luke Mogulson,person,6,2
+5,Elizabeth Rubin,person,9,3
+6,Ilaha,person,8,4
+7,Hazami,person,7,5
+8,9 other journalists,person,5,5
+9,Journalists and Humanitarians outside of afganistan,group,3,1
+10,Funding,entity,5,3
+11,Kam Air,entity,3,3
+12,Doha,city,1,5
+13,Ghayour,person,13,7
+14,Najib Sharifi,person,15,7
+15,40 staff,person,15,9
+16,Afghan Journalists,person,14,8
+17,3 safe houses,place,13,9
+18,Afghan Journalists Safety Commitee,group,15,6
+19,Kabul,city,15,5
+20,700 Journalists and Family Members,group,7,7
+21,Family Members,person,11,9
+22,Abbas Dollar,person,2,8
+23,Golden Castle,place,2,9
+24,Habib,person,3,5
+25,Habib Guest House,place,2,6
+26,Shawn,person,5,8
+27,Shawn Guest House,place,4,9
+28,Edi Rama,person,9,4
+29,Visas,entity,9,5
+30,Network supporting Afghan Journalists,group,7,11
+31,Mazar-i-Sharif,city,7,12
