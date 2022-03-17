@@ -59,16 +59,21 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 				.attr("id","panel_"+i)
 				.style("height",(panelSize-100)+"px")
 				.style("width","300px")
-				.style("border","1px solid black")
-				.style("background-color","rgba(255,255,255,.8)")
 				.style("padding","20px")
 				.style("padding-top","80px")
 				.style("font-size","14px")
 				.style("position","relative")
 				.style("margin-left","1000px")
 				//.attr("id","panel_"+cleanString(nodeData[i].label))
-				var panelTitle = chapterPanel.append("div").attr("class","panelTitle")
+				var panelTitle = chapterPanel.append("div").attr("class","panelTitle").html(nodeData[i].label)
+				.style("padding","20px")
+				.style("font-size","24px")
+				
 				var panelContent = chapterPanel.append("div").attr("class","panelContent")
+				.style("padding","20px")
+				.style("border","1px dotted black")
+				.style("background-color","rgba(255,255,255,.8)")
+
 				panelContent.html(nodeData[i].notes)
 			}
 		}
@@ -424,7 +429,7 @@ function render(){
       if(scrollTop<newScrollTop){//if the new value is smaller, then it is scrolling down
           scrollTop = newScrollTop//set the scroller place to its new placement
           //console.log("down")//if it is going down, we need to add 1 to the panel number because we want to trigger the next panel
-          var panelNumber = Math.round(scrollTop/panelSize)//therefore which panel we are on is the scroller's place divided by panel height
+          var panelNumber = Math.round(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
       }else{
           //console.log("up")
           scrollTop = newScrollTop//set the scroller place to its new placement
