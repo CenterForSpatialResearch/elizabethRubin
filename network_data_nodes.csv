@@ -14,11 +14,14 @@ chapter,label,type,x,y
 13,Ghayour,person,11,5
 14,Najib Sharifi,person,12,4
 15,40 staff,person,13,4
+15,40 staff blank,blank,16,4
 16,Afghan Journalists,person,13,5
 17,3 safe houses,place,13,7
+17,3 safe houses blank,blank,16,7
 18,Afghan Journalists Safety Commitee,group,13,3
 19,Kabul,city,12,2
 20,700 Journalists and Family Members,group,9,7
+20,700 Journalists and Family Members blank,blank,11,9
 21,Family Members,person,11,6
 22,Abbas Dollar,person,4,6
 23,Golden Castle,place,4,8

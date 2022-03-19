@@ -31,7 +31,7 @@ var svg = d3.select("#network").append("svg").attr("width",width).attr("height",
   
 Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
     .then(function(data){
-		console.log(data[0])
+	//	console.log(data[0])
 		
 	 nodeCoordsDictionary = nodeDictionary(data[0])
 	  links = data[1]
@@ -42,15 +42,30 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 	  d3.selectAll("text").style("opacity",1)
 		
 		
-	drawDotGrid(35,700,5*networkGrid,7*networkGrid+40,svg,"700 Journalists and Family Members")
+	drawDotGrid(45,700,4*networkGrid,7*networkGrid+40,svg,"700 Journalists and Family Members")
+		
 	drawDotGrid(5,9,9*networkGrid,6*networkGrid+30,svg,"Family Members")
 	drawDotGrid(5,9,3*networkGrid+10,5*networkGrid+30,svg,"9 other journalists")
 	drawDotGrid(8,40,11*networkGrid+10,4*networkGrid+30,svg,"40 staff")
 	drawDotGrid(20,270,11*networkGrid+10,5*networkGrid+30,svg,"Afghan Journalists")
 	drawDotGrid(3,3,11*networkGrid+10,7*networkGrid+30,svg,"3 safe houses")
 		
-		var coords = [[100,200],[230,400],[200,39]]
-		drawBlob(coords,"blue",100,100,svg)
+		//var coords = [[5,1],[6,2],[8,3],[7,5],[5,4],[2,6],[3,3],[4,2]]
+		
+		var coordNames = ["Funding","Luke Mogulson","Scott Shadian","Blumenthal","Elizabeth Rubin","Ilaha Eli Omar","Hazami","9 other journalists","Funding"]
+		drawBlob(coordNames,"#568d99",100,100,svg)
+		
+		var blob2Names = ["Habib","Abbas Dollar","Shawn","Shawn Guest House","700 Journalists and Family Members","Ghayour","Family Members","700 Journalists and Family Members blank","Habib Guest House"]
+		
+		drawBlob(blob2Names,"#e0a926",100,100,svg)
+		
+		var blob3Names = ["Ghayour","Najib Sharifi","40 staff blank","3 safe houses blank","3 safe houses"]
+		drawBlob(blob3Names,"#74b59b",100,100,svg)
+		
+		
+		//da4c27
+		var blob4Names = ["Ghayour","Family Members"]
+		drawBlob(blob4Names,"#da4c27",100,100,svg)
 		
 		
 		for(var i in nodeData){
@@ -92,19 +107,32 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 })
 
 function drawBlob(coordinates,color,x,y,svg){
-	var linkPath = d3.line().curve(d3.curveBasis)	
+	var formattedCoords = []
+	for(var i in coordinates){
+		var coordName = coordinates[i]
+		var coords = nodeCoordsDictionary[cleanString(coordName)].coords
+		//console.log(coords)
+		formattedCoords.push([coords[0]*networkGrid,coords[1]*networkGrid])
+	}
+	//console.log(formattedCoords)
+	
+	var linkPath = d3.line().curve(d3.curveLinearClosed)//.curve(d3.curveBasisClosed)	
 	var path = svg//.append("g")//.selectAll("#_"+cleanString(source)+"_"+cleanString(target))
 	.append("path")
 	.attr("d",function(){
-			return linkPath(coordinates)
+			return linkPath(formattedCoords)
 	})
 	.attr('fill', color)
+	.attr("stroke",color)
+	.attr("stroke-width",100)
+	.attr("stroke-linecap","round")
 	.attr("opacity",.2)
+	.attr("transform","translate("+xOffset+","+offset+")")
 }
 
 function drawDotGrid(w,count,startX,startY,svg,divName){
 	var r = 3
-	console.log(nodeCoordsDictionary[cleanString(divName)].chapter)
+	//console.log(nodeCoordsDictionary[cleanString(divName)].chapter)
 	svg.append("rect").attr("width",w*(r*2+2)).attr("height",Math.ceil(count/w)*(r*2+2))
 	.attr("x",startX-4)
 	.attr("y",startY-4)
@@ -119,14 +147,14 @@ function drawDotGrid(w,count,startX,startY,svg,divName){
 		.attr("class","dots")
 		.attr("chapter",nodeCoordsDictionary[cleanString(divName)].chapter)
 		.attr("id",function(d){
-			console.log(i)
+			//console.log(i)
 			return cleanString(divName)+"_"+i
 		})
 		.attr("opacity",0)
 	}
 }
 function transitionDotGrid(chapter){
-	console.log(chapter)
+	//console.log(chapter)
 	var dotChapter = d3.selectAll(".dots")//.remove()
 	 .each(function(d){
 	 //	console.log(d)
@@ -353,10 +381,10 @@ function blobs(pathData,divName) {
 };
   
 function setOpacityNodes(chapter){
-	console.log(chapter)
+	//console.log(chapter)
 	for(var i in nodeData){
 		if(parseInt(nodeData[i].chapter)<=chapter){
-			console.log(nodeId)
+		//	console.log(nodeId)
 			if(nodeData[i].label!=undefined){
 				var nodeId = cleanString(nodeData[i].label)
 				d3.selectAll("#_"+nodeId).style("opacity",1)
