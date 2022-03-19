@@ -1,32 +1,32 @@
-chapter,label,type,x,y
-1,Kim Barker,person,7,3
-2,Scott Shadian,person,7,1
-3,Blumenthal,person,8,2
-4,Luke Mogulson,person,6,2
-5,Elizabeth Rubin,person,9,3
-6,Ilaha,person,8,4
-7,Hazami,person,7,5
-8,9 other journalists,person,5,5
-9,Journalists and Humanitarians outside of afganistan,group,3,1
-10,Funding,entity,5,3
-11,Kam Air,entity,3,3
-12,Doha,city,1,5
-13,Ghayour,person,13,7
-14,Najib Sharifi,person,15,7
-15,40 staff,person,15,9
-16,Afghan Journalists,person,14,8
-17,3 safe houses,place,13,9
-18,Afghan Journalists Safety Commitee,group,15,6
-19,Kabul,city,15,5
-20,700 Journalists and Family Members,group,7,7
-21,Family Members,person,11,9
-22,Abbas Dollar,person,2,8
-23,Golden Castle,place,2,9
-24,Habib,person,3,5
-25,Habib Guest House,place,2,6
-26,Shawn,person,5,8
-27,Shawn Guest House,place,4,9
-28,Edi Rama,person,9,4
-29,Visas,entity,9,5
-30,Network supporting Afghan Journalists,group,7,11
-31,Mazar-i-Sharif,city,7,12
+chapter,label,type,x,y,notes
+1,Kim Barker,person,7,3,"Shortly after August 15th 2021, Kim Barker starts to assemsble a group to help with efforts in ensuring the safe travel of Afghan journalists. Kim Barker is a journalist who authored The Taliban Shuffle: Strange Days in Afghanistan and Pakistan about her experiences covering the war in Afghanistan. She is supported by Scott Shadian, Luke Mogulson, and Senator Blumenthal."
+2,Scott Shadian,person,7,1,"Scott is a governance, stabilization, and communications specialist with a decade of experience in countering violent extremism and disinformation. Having worked for more than fifteen years in conflict-affected environments, in both the public and private sectors, Scott has unique insight into how mainstream media and digital platforms – as well as non-traditional means of communication – relate to development and stabilization activities."
+3,Blumenthal,person,8,2,"Richard Blumenthal is an American lawyer and politician serving as the senior United States senator from Connecticut, a seat he has held since 2011."
+4,Luke Mogulson,person,6,2,"Mogelson was born in St. Louis. He was a Contributing Writer for the New York Times Magazine, reporting from Afghanistan, from 2011 to 2014. He then moved to the New Yorker, where he has reported from Syria and on domestic affairs in the United States.[1]"
+5,Elizabeth Rubin,person,9,3,"Kim Barker reaches out to Elizabeth Rubin. Elizabeth Rubin is an American journalist. She is a contributing writer for The New York Times Magazine. She has a close contact named Ghayour."
+6,Ilaha Eli Omar,person,8,4,"Kim Barker reaches out to Ilaha Eli Omar. Ilaha Eli Omar is an Afghan-American grassroots mobilizer and humanitarian who is focused on perserving the dignity of the journalists in the process of their travels."
+7,Hazami,person,7,5,"Kim Barker reaches out to Hazami, who is a contact who helped organize?? "
+8,9 other journalists,person,5,5,"Kim Barker also reached out to her network of western journalists who have experience in afghanistan, these journalists in turn connect with people on the ground who provide food, shelter and travel for journalist families."
+9,Journalists and Humanitarians outside of afganistan,group,3,1,"This group of journalists and humanists join forces to transport journalists and families out of Afghanistan. They charter 2 planes to fly out of Mazar-i-Sharif to Doha."
+10,Funding,entity,5,3,"Funding for 1 plane comes from Tina Fey who portrayed Kim Barker on film"
+11,Kam Air,entity,3,3,"Kam Air is the largest private Afghan airline. Founded in 2003, Kam Air has seven aircraft and a workforce of over 1,200 people, operating scheduled domestic passenger services throughout Afghanistan and international services to destinations in Central Asia, South Asia, and the Middle East."
+12,Doha,city,1,5,""
+13,Ghayour,person,13,7,"The center of our story, Ghayour is in charge of security for the Afghan Journalists Safety Commitee where he ensures the safety of 270 journalists by placing them in 3 safe houses across Kabul."
+14,Najib Sharifi,person,15,7,"The head of Afghan Journalists Safety Commitee"
+15,40 staff,person,15,9,"40 staff members are employed by Afghan Journalists Safety Commitee in Kabul"
+16,Afghan Journalists,person,14,8,"270 journalists are being served by Afghan Journalists Safety Commitee at the time of Ameircan withdrawal"
+17,3 safe houses,place,13,9,"3 safehouses in Kabul are actively being used by Afghan Journalists Safety Commitee to house journalists across the country, Ghayhour is in charge of the safety of journalists and coordinates their housing and travel"
+18,Afghan Journalists Safety Commitee,group,15,6,"Afghan Journalists Safety Committee (AJSC) is an independent, nonprofit organization that supports press freedom in Afghanistan. We work towards the advancement of journalist safety and rights so that they can report in a safe and fearless environment. AJSC is based in Kabul and maintains a presence in every province of Afghanistan. AJSC has a board of advisors composed of well-known media workers and civil society activists. AJSC’s executive section has official representatives in eight regions of the country and an unofficial focal point in the remaining 26 provinces. This has enabled AJSC to establish representation throughout the country and provide media workers with necessary help when needed."
+19,Kabul,city,15,5,"Capital and base for the Afghan Journalists Safety Commitee, and where Ghayour lives."
+20,700 Journalists and Family Members,group,7,11,"A group of 700 people, comprised of 22 heads of households and their families have traveled to Mazar-i-Sharif in the hopes of leaving Afghanistan through the city. They are housed in various hotels, safe houses, guest houses, event spaces for 28 days before the first flight is able to leave for Doha on the Kam Air cartered flight."
+21,Family Members,person,11,9,"Becuase of his work, Ghayour received offers from different past collaborators to travel from Afghanistan. He is unable to leave his family, and no offers materialized that could insure the safety of his family. As a result, Ghayour is unable to leave and msut travel to Mazar in the hopes of joining the group of 700 there. Ghayour is traveling with his parents, 3 sisters, 1 brother, wife, and 2 children."
+22,Abbas Dollar,person,2,8,"Abbas Ibrahimzada is a member of the Afghan parliament known locally as “Abbas Dollar” because of his wealth."
+23,Golden Castle,place,2,9,"Golden Castle is Abbas Dollar's hotel which he uses to house journalist families. He is able to stop Taliban from checking guest lists."
+24,Habib,person,3,5,"A local plumber who is able to use his connections to secure housing for journalist families"
+25,Habib Guest House,place,2,6,"Houses of Habib's past clients who offer housing."
+26,Shawn,person,5,8,"American ex-military working in Mazar"
+27,Shawn Guest House,place,4,9,"Houses set up by Shawn for journalist families"
+28,Edi Rama,person,11,3,"The Prime Minister of Albania who helps Elizabeth secure visas for the journalist families"
+29,Visas,entity,12,3,"visas needed to be issued for families to leave Mazar on charter planes"
+30,Network supporting Afghan Journalists,group,7,13,"a"
+31,Mazar-i-Sharif,city,7,14,"Mazār-i-Sharīf, also called Mazār-e Sharīf, or just Mazār, is the fourth-largest city of Afghanistan, with a population estimate of 500,207 people. It is the capital of Balkh province and is linked by highways with Kunduz in the east, Kabul in the southeast, Herat in the southwest and Termez, Uzbekistan in the north."

@@ -3,20 +3,8 @@ var triangle="M98.31,214.85l-1.48-2.57L96,210.87l-1.48-2.55-1.88,3.26-1.89,3.27h
 var star="M80.85,210.45l-1.17,1.13-1.13,1.11.26,1.53.28,1.63-2.84-1.49-2.83,1.49.3-1.74.24-1.42-2.3-2.24,2-.29,1.18-.17.9-1.83.51-1,.6,1.21.82,1.67Z" 	
 var circle="M114.31,214.94l1-1.75.91-1.59-1.07-1.86-.85-1.47h-3.85l-.89,1.55-1,1.78.85,1.49,1.07,1.85h3.85Z"  
 	
-var  path1 ="M749,356c18.38-16.44,48.88-21.6,70.28-9.35,20.43,11.68,25.53,39.12,23.07,62.53s-10.21,46.71-6.8,70c2.81,19.17-9.86,71.72-23,86-32.81,35.75-82.55,52.58-203.93,78.91-75.81,16.45-108,11.2-164.27-.34-37.4-7.67,22.72-45.92,19.45-83.72-2.47-28.6,9.1-56.64,29.75-76.56s46.88-33,73.1-44.63C613.91,417.83,713.77,387.55,749,356Z"
+var  path1 ="M543.78,192.94C540.7,202.45,484.93,223,469,247c-16.73,25.18-72,82.56-183.81,79.66-26.29-.68-75.86-7.18-99.76-18.13-73.43-33.66-90.92-111.73-96-125C85.74,173.76,21,103,19.84,81.6c-.74-13.7,12-20.37,23.48-27.8s25.56-5.64,39.16-7.36c39.47-5,170-13.06,195.49-12,41.54,1.66,84.61,8.93,125.26,16.8,38.18,7.39,74.73,63.63,105.47,86C527.45,150.89,555.92,155.51,543.78,192.94Z" //transform="translate(-19.31 -33.82)"
 // transform="translate(-190.01 -85.38)"/><path class="cls-1" 
-
-var path2 = 
-"M776.07,343.58c8.56-5.38,22.12-5.33,31.52-1.59,11.72,4.68,22.79,16.73,27.48,25.69,7.91,15.15,1.13,33.51,4.5,50.27,14.4,71.57-11.86,141.12-19.74,155.94C789.37,631.14,601,680.55,445.09,658.74c-46.36-6.48-128-40.28-165-68.93C242.3,560.54,199.4,480.32,192.34,457c-14.74-48.86,44-47.93,77.26-78.68,30.25-28,71.29-42,112.24-46.67s82.32-.55,123.32,3.52c43.26,4.29,88.94,18.95,132.2,23.25C683.91,363,736.44,368.45,776.07,343.58Z" 
-
-//transform="translate(-190.01 -85.38)"/><path class="cls-2"
- var path3 ="M794.35,339.56c-11.69,1.2-20.79,13.91-18.14,25.35,1.5,6.48,6,11.91,11.38,15.88s11.46,6.71,17.44,9.62A141.71,141.71,0,0,1,829.54,405c25,19.17,39.52,50.21,66.29,66.8,8,4.93,29.1,14.08,52,17.52,12.72,1.91,61.91.88,73.4-1.31,21.91-4.17,41.52-13.95,60.54-25.6,8.57-5.25,37-25.77,42.79-30.6,7.67-6.42,35-29.37,40.3-35.17,11.61-12.79,23-25.8,32.51-40.24A70.32,70.32,0,0,0,1208,329.23a22.17,22.17,0,0,0,0-9,24.38,24.38,0,0,0-4.06-7.83,157.82,157.82,0,0,0-48.17-44.87c-7.75-4.63-80.28-39.9-92.14-44.27-20-7.35-41-11.31-61.91-14.92-30.65-5.28-91.52-1.1-112.7,14.76-20.51,15.37-35.92,36.68-49.27,58.55C826.81,303,819.13,337,794.35,339.56Z" 
-
-//transform="translate(-190.01 -85.38)"/><path class="cls-3" 
-var path3 ="M692.41,159.86c-13.85-8.53-71.12-46-86.71-55.13-33.14-19.45-73.69-20.15-112.1-19-13.61.4-27.43,1-40.37,5.25-25.08,8.23-44,29.19-57.9,51.6s-24.23,47-39.2,68.75c-3.15,4.56-6.66,9.61-5.92,15.11s5.58,9.51,10,12.89l29,21.91c26.31,19.89,53.48,40.2,85.31,48.8,26.29,7.1,48,10.61,75.12,13.28,26.05,2.56,63.29-8.3,74.14-12.71,35.32-14.36,68.67-33.09,101.91-51.76,12-6.75,45-17.81,48.58-32.84C776.42,217.06,709.67,170.49,692.41,159.86Z" 
-
-//transform="translate(-190.01 -85.38)"/><path class="cls-4" 
-var path4 ="M786.28,501.18c-9.4-5-33.41-22.6-37.34-47.56-5.3-33.63,2.74-48.62,15.76-80.08,3.82-9.24,8.67-18.26,15.84-25.22s16-7.71,25.94-7.13c14.87.88,27.79,26.72,22.63,40.7-15.94,43.2,10,34.83,4.14,77.53C830.4,480.06,810.53,514,786.28,501.18Z"// transform="translate(-190.01 -85.38)"/></svg>
 
 var fillColors=["#568d99","#74b59b","#e0a926","#da4c27"]
 var panel = 0    
@@ -32,6 +20,8 @@ var line = d3.line()
 var nodeCoordsDictionary
 var nodeData = null
 var linkData = null
+var offset = 20
+var xOffset = -140
 
 
 var scrollTop = 0
@@ -49,7 +39,18 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 	  drawLinks(links,nodeCoordsDictionary)
 	   nodeData =data[0]
 		drawNodes(data[0])      //
-	  d3.selectAll("text").style("opacity",0)
+	  d3.selectAll("text").style("opacity",1)
+		
+		
+	drawDotGrid(35,700,5*networkGrid,7*networkGrid+40,svg,"700 Journalists and Family Members")
+	drawDotGrid(5,9,9*networkGrid,6*networkGrid+30,svg,"Family Members")
+	drawDotGrid(5,9,3*networkGrid+10,5*networkGrid+30,svg,"9 other journalists")
+	drawDotGrid(8,40,11*networkGrid+10,4*networkGrid+30,svg,"40 staff")
+	drawDotGrid(20,270,11*networkGrid+10,5*networkGrid+30,svg,"Afghan Journalists")
+	drawDotGrid(3,3,11*networkGrid+10,7*networkGrid+30,svg,"3 safe houses")
+		
+		var coords = [[100,200],[230,400],[200,39]]
+		drawBlob(coords,"blue",100,100,svg)
 		
 		
 		for(var i in nodeData){
@@ -84,11 +85,64 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
       //  drawBarChart()
         // step0()
 
-      // blobs(path1,"path1");
+       //blobs(path1,"path1");
       // blobs(path2,"path2");
       // blobs(path3,"path3");
       // blobs(path4,"path4");
 })
+
+function drawBlob(coordinates,color,x,y,svg){
+	var linkPath = d3.line().curve(d3.curveBasis)	
+	var path = svg//.append("g")//.selectAll("#_"+cleanString(source)+"_"+cleanString(target))
+	.append("path")
+	.attr("d",function(){
+			return linkPath(coordinates)
+	})
+	.attr('fill', color)
+	.attr("opacity",.2)
+}
+
+function drawDotGrid(w,count,startX,startY,svg,divName){
+	var r = 3
+	console.log(nodeCoordsDictionary[cleanString(divName)].chapter)
+	svg.append("rect").attr("width",w*(r*2+2)).attr("height",Math.ceil(count/w)*(r*2+2))
+	.attr("x",startX-4)
+	.attr("y",startY-4)
+	.attr("fill","white")
+	for(var i =0; i<count; i++){
+		var x = i%w
+		var y = Math.floor(i/w)
+		svg.append("circle")
+		.attr("r",r)
+		.attr("cx",x*(r*2+2)+startX)
+		.attr("cy",y*(r*2+2)+startY)
+		.attr("class","dots")
+		.attr("chapter",nodeCoordsDictionary[cleanString(divName)].chapter)
+		.attr("id",function(d){
+			console.log(i)
+			return cleanString(divName)+"_"+i
+		})
+		.attr("opacity",0)
+	}
+}
+function transitionDotGrid(chapter){
+	console.log(chapter)
+	var dotChapter = d3.selectAll(".dots")//.remove()
+	 .each(function(d){
+	 //	console.log(d)
+	 	var dotChapter = d3.select(this).attr("chapter")
+		 var dotIndex = d3.select(this).attr("id").split("_")[1]
+		// console.log(dotIndex)
+	 	//console.log(dotChapter)
+		 if(dotChapter<chapter){
+		 	d3.select(this).transition().delay(dotIndex).attr("opacity",1)
+		 }else if(dotChapter==chapter){
+		 	d3.select(this).transition().delay(dotIndex).attr("opacity",1)
+		 }else{
+		 	d3.select(this).transition().delay(1000-dotIndex).attr("opacity",0)
+		 }
+	 })
+}
 	
 function nodeDictionary(data){
 	var formatted ={}
@@ -110,7 +164,7 @@ function cleanString(string){
 	
 
 function drawLinks(links,nodes){
-	var linkPath = d3.line().curve(d3.curveBasis)	
+	var linkPath = d3.line()//.curve(d3.curveBasis)	
 	var cellSize =  networkGrid 
 	
 	// console.log(links)
@@ -126,7 +180,8 @@ function drawLinks(links,nodes){
 			// console.log([target])
 // 			console.log(nodes)
 // 			console.log(targetCoords)
-			var lineData = [[sourceCoords[0]*cellSize,sourceCoords[1]*cellSize],[targetCoords[0]*cellSize,targetCoords[1]*cellSize]]
+			var lineData = [[sourceCoords[0]*cellSize+xOffset,sourceCoords[1]*cellSize+offset],
+			[targetCoords[0]*cellSize+xOffset,targetCoords[1]*cellSize+offset]]
 			
 			
 		//	console.log(lineData)
@@ -142,7 +197,8 @@ function drawLinks(links,nodes){
 			path.attr("pathLength",pathLength)
 			//.attr("stroke-dasharray", pathLength + " " + pathLength)
 			.attr("stroke-dasharray",pathLength+" "+pathLength)//pathLength + " " + pathLength)
-			.attr("stroke-dashoffset",pathLength)
+			//.attr("stroke-dashoffset",pathLength)
+			.attr("stroke-dashoffset",0)
 		}
 	}
 }
@@ -163,11 +219,11 @@ function drawNodes(data){
 		}
 	})
 	.attr("x",function(d){
-		return d.x*cellSize
+		return d.x*cellSize+xOffset
 	})
 	.style("text-anchor","middle")
 	.attr("y",function(d){
-		return d.y*cellSize+3
+		return d.y*cellSize+3+offset
 	})
 	.style("stroke","rgba(255,255,255,1)")
 	.style("stroke-width","8px")
@@ -207,11 +263,11 @@ function drawNodes(data){
 		}
 	})
 	.attr("x",function(d){
-		return d.x*cellSize
+		return d.x*cellSize+xOffset
 	})
 	.style("text-anchor","middle")
 	.attr("y",function(d){
-		return d.y*cellSize+3
+		return d.y*cellSize+3+offset
 	})
 	.style("font-size",function(d){
 		if(d.label=="Ghayour"){//}||d.label=="Elizabeth Rubin"){
@@ -415,7 +471,7 @@ function blobTransitions(blobId, scrolltop){
 		d3.select(blobId).attr("fill",fillColors[0]).attr("opacity",.2)
 	}else{
 		d3.select(blobId).attr("fill","none")
-		d3.select(blobId).attr("stroke-dashoffset",pathLength-(scrolltop%pathLength))
+		d3.select(blobId).attr("stroke-dashoffset",scrolltop)//pathLength-(scrolltop%pathLength))
 	}
 }
 
@@ -440,12 +496,16 @@ function render(){
           panel = panelNumber//set the panel number to this new number so we can keep track
 		  setOpacityNodes(panel)
 		  transitionLinks(panel)
-	transitionLinks(panel)
+		  //transitionLinks(panel)
+		   transitionDotGrid(panel)
 		  
 		  d3.selectAll(".panel").style("opacity",.2)
 		  d3.select("#panel_"+(panel-1)).style("opacity",1)
        //   listOfStepFunctions[panel]()//do the function that is associated with that panel number, we add the () to the end of the name to trigger the function
       }
+	  // if(panel==1){
+  // 		  blobTransitions("#path1", scrollTop)
+  // 	  }
     currentScrollTop.text(scrollTop)
   }
   window.requestAnimationFrame(render)//we continue to call this function recursively because we always need to check where the scroller is
