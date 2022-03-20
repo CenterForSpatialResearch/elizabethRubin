@@ -1,4 +1,6 @@
- // var path = "M477.38,230.73c11.47-3.27,44.58-14.46,49.81-15.3,19.74-3.17,41,3,55.14,16.12,4.08,3.78,12.23,23.54,12.69,28.88,1.42,16.42,7.38,32.84,8.81,49.26,1.77,20.45-1.73,37.78-10.2,56.74-4.31,9.66-15.33,20.88-24.25,27.32-5.68,4.1-12.39,6.82-19.19,9.05-39.48,12.94-82.63,12-124.53,11.57-15.84-.15-32,.12-47,5-22,7.17-45.47,8.5-68.64,10.83s-85.78,6.34-98.11-43.51c-9.72-39.31,38.49-89.26,7.66-139.27-7.87-12.76-34-35-27.68-55.13,2.51-8,13.36-13.59,21.83-14.36,34.8-3.19,67.93,54.77,140.11,53.23C399.92,230.17,438.21,241.88,477.38,230.73Z" //transform="translate(-190.48 -177.29)"
+//https://docs.google.com/spreadsheets/d/e/2PACX-1vS_GYiTbnvSImmtBQvhKCdzzg4O2g0bdaEwYYBecCITafcDyDYezzhFo_O8oJGCfwSn5Ogz4I4ccZTi/pub?gid=1765822874&single=true&output=csv
+
+
 var triangle="M98.31,214.85l-1.48-2.57L96,210.87l-1.48-2.55-1.88,3.26-1.89,3.27h7.54Z"// transform="translate(-70.59 -184.02)"/><path class="cls-1"
 var star="M80.85,210.45l-1.17,1.13-1.13,1.11.26,1.53.28,1.63-2.84-1.49-2.83,1.49.3-1.74.24-1.42-2.3-2.24,2-.29,1.18-.17.9-1.83.51-1,.6,1.21.82,1.67Z" 	
 var circle="M114.31,214.94l1-1.75.91-1.59-1.07-1.86-.85-1.47h-3.85l-.89,1.55-1,1.78.85,1.49,1.07,1.85h3.85Z"  
@@ -29,16 +31,21 @@ var newScrollTop = 0
 
 var svg = d3.select("#network").append("svg").attr("width",width).attr("height",height)
   
-Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
+Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv"),
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQMSyCudIYex0AqELLeyFVwRcwZrvDrXsxCX9IjYlAN-HqIlfvuCq1Pym3S9PDAfhiRDUS66ilz_apU/pub?gid=0&single=true&output=csv"),
+d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQMSyCudIYex0AqELLeyFVwRcwZrvDrXsxCX9IjYlAN-HqIlfvuCq1Pym3S9PDAfhiRDUS66ilz_apU/pub?gid=91574573&single=true&output=csv")])
     .then(function(data){
 	//	console.log(data[0])
+		//console.log(data[3])
+	 nodeCoordsDictionary = nodeDictionary(data[2])
+	  links = data[3]
+		linkData = data[3]
 		
-	 nodeCoordsDictionary = nodeDictionary(data[0])
-	  links = data[1]
-		linkData = data[1]
 	  drawLinks(links,nodeCoordsDictionary)
 	   nodeData =data[0]
-		drawNodes(data[0])      //
+		drawNodes(data[0])    
+		
+		  //
 	  d3.selectAll("text").style("opacity",0)
 		
 		
@@ -176,6 +183,7 @@ function nodeDictionary(data){
 	var formatted ={}
 	for(var i in data){
 		if(data[i].label!=undefined){
+			//console.log(data[i])
 			var key = cleanString(data[i].label)
 			var coords = [parseInt(data[i].x),parseInt(data[i].y)]
 			var chapter = data[i].chapter
