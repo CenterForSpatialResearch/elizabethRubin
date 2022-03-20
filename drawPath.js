@@ -60,11 +60,11 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 		var coordNames = ["Funding","Luke Mogulson","Scott Shadian","Blumenthal","Elizabeth Rubin","Ilaha Eli Omar","Hazami","9 other journalists","Funding"]
 		drawBlob(coordNames,"#568d99",100,100,svg)
 		
-		var blob2Names = ["Habib","Abbas Dollar","Shawn","Shawn Guest House","700 Journalists and Family Members","Ghayour","Family Members","700 Journalists and Family Members blank","Habib Guest House"]
+		var blob2Names = ["Habib","Abbas Dollar","Shawn","Shawn Guest House","700 Journalists and Family Members","Ghayour","Family Members","700 Journalists and Family Members blank","Mazar-i-Sharif blank","Habib Guest House"]
 		
 		drawBlob(blob2Names,"#e0a926",100,100,svg)
 		
-		var blob3Names = ["Ghayour","Najib Sharifi","40 staff blank","3 safe houses blank","3 safe houses"]
+		var blob3Names = ["Ghayour","Najib Sharifi","Kabul","40 staff blank","3 safe houses blank","3 safe houses"]
 		drawBlob(blob3Names,"#74b59b",100,100,svg)
 		
 		
@@ -76,6 +76,7 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 		for(var i in nodeData){
 			
 			if(nodeData[i].label!=undefined){
+				
 				var chapterPanel = d3.select("#content").append("div").attr("class","panel")
 				.attr("id","panel_"+i)
 				.style("height",(panelSize-100)+"px")
