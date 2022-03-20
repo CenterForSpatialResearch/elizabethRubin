@@ -39,7 +39,7 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 	  drawLinks(links,nodeCoordsDictionary)
 	   nodeData =data[0]
 		drawNodes(data[0])      //
-	  d3.selectAll("text").style("opacity",1)
+	  d3.selectAll("text").style("opacity",0)
 		
 		
 	drawDotGrid(45,700,4*networkGrid,7*networkGrid+40,svg,"700 Journalists and Family Members")
@@ -64,7 +64,7 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 		
 		
 		//da4c27
-		var blob4Names = ["Ghayour","Family Members"]
+		var blob4Names = ["Ghayour","Family Members","Ghayour"]
 		drawBlob(blob4Names,"#da4c27",100,100,svg)
 		
 		
@@ -78,8 +78,8 @@ Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
 				.style("padding","20px")
 				.style("padding-top","80px")
 				.style("font-size","14px")
-				.style("position","relative")
-				.style("margin-left","1000px")
+				//.style("position","relative")
+				//.style("float","right")
 				//.attr("id","panel_"+cleanString(nodeData[i].label))
 				var panelTitle = chapterPanel.append("div").attr("class","panelTitle").html(nodeData[i].label)
 				.style("padding","20px")
@@ -124,7 +124,7 @@ function drawBlob(coordinates,color,x,y,svg){
 	})
 	.attr('fill', color)
 	.attr("stroke",color)
-	.attr("stroke-width",100)
+	.attr("stroke-width",60)
 	.attr("stroke-linecap","round")
 	.attr("opacity",.2)
 	.attr("transform","translate("+xOffset+","+offset+")")
@@ -163,7 +163,7 @@ function transitionDotGrid(chapter){
 		// console.log(dotIndex)
 	 	//console.log(dotChapter)
 		 if(dotChapter<chapter){
-		 	d3.select(this).transition().delay(dotIndex).attr("opacity",1)
+		 	d3.select(this).transition().delay(dotIndex).attr("opacity",.8)
 		 }else if(dotChapter==chapter){
 		 	d3.select(this).transition().delay(dotIndex).attr("opacity",1)
 		 }else{
@@ -225,8 +225,8 @@ function drawLinks(links,nodes){
 			path.attr("pathLength",pathLength)
 			//.attr("stroke-dasharray", pathLength + " " + pathLength)
 			.attr("stroke-dasharray",pathLength+" "+pathLength)//pathLength + " " + pathLength)
-			//.attr("stroke-dashoffset",pathLength)
-			.attr("stroke-dashoffset",0)
+			.attr("stroke-dashoffset",pathLength)
+			//.attr("stroke-dashoffset",0)
 		}
 	}
 }
@@ -275,7 +275,7 @@ function drawNodes(data){
 			return 400
 		}
 	})
-	.attr("id",function(d){return "_"+cleanString(d.label)})
+	.attr("id",function(d){return "_"+cleanString(d.label)+"_halo"})
 	
 	
 	svg.selectAll(".nodes")
@@ -383,16 +383,29 @@ function blobs(pathData,divName) {
 function setOpacityNodes(chapter){
 	//console.log(chapter)
 	for(var i in nodeData){
-		if(parseInt(nodeData[i].chapter)<=chapter){
+		if(parseInt(nodeData[i].chapter)<chapter){
 		//	console.log(nodeId)
 			if(nodeData[i].label!=undefined){
 				var nodeId = cleanString(nodeData[i].label)
-				d3.selectAll("#_"+nodeId).style("opacity",1)
+				d3.selectAll("#_"+nodeId).transition().style("opacity",1)
+				.style("font-weight",200)//.style("fill","black")
+				d3.selectAll("#_"+nodeId+"_halo").style("opacity",1)
+				.style("fill","black")
 			}
-		}else{
+		}else if(parseInt(nodeData[i].chapter)==chapter){
+		//	console.log(nodeId)
+			if(nodeData[i].label!=undefined){
+				var nodeId = cleanString(nodeData[i].label)
+				d3.selectAll("#_"+nodeId).transition().style("opacity",1)
+				.style("font-weight",400)//.style("fill","red")
+				d3.selectAll("#_"+nodeId+"_halo").style("opacity",1)
+			}
+		}
+		else{
 			if(nodeData[i].label!=undefined){
 				var nodeId = cleanString(nodeData[i].label)
 				d3.selectAll("#_"+nodeId).style("opacity",0)
+				d3.selectAll("#_"+nodeId+"_halo").style("opacity",0)
 			}
 		}
 	}
@@ -409,14 +422,15 @@ function transitionLinks(chapter){
 			var linkId = "_"+cleanString(source)+"_"+cleanString(target)
 			//console.log(linkId)
 		
-			var linkChapter = parseInt(nodeCoordsDictionary[cleanString(target)].chapter)+1
+			var linkChapter = parseInt(nodeCoordsDictionary[cleanString(source)].chapter)
 		//	console.log(linkChapter)
 			
 			var pathLength = d3.select("#"+linkId).attr("pathLength")
 			if(linkChapter<chapter){
 			//	console.log(scrollTop)
 				//if showing chpater, then show just the whole line
-				d3.selectAll("#"+linkId).style("opacity",1).transition().duration(1000).attr("stroke-dashoffset",0)
+				d3.selectAll("#"+linkId).style("opacity",.6)
+				.transition().duration(1000).attr("stroke-dashoffset",0)//.attr("stroke","black")
 			}else if(linkChapter==chapter){
 				//show the percentage of the line that is scrolled through
 				var percentScroll = panelSize/(scrollTop-(chapter-1)*panelSize)
@@ -424,6 +438,7 @@ function transitionLinks(chapter){
 // 				console.log(scrollTop)
 				d3.selectAll("#"+linkId).transition().ease(d3.easeLinear)
 				.attr("stroke-dashoffset",0)
+				.attr("opacity",1)//.attr("stroke","red")
 			}else{
 				//show no line, transition to none
 				d3.selectAll("#"+linkId).transition()
@@ -513,11 +528,11 @@ function render(){
       if(scrollTop<newScrollTop){//if the new value is smaller, then it is scrolling down
           scrollTop = newScrollTop//set the scroller place to its new placement
           //console.log("down")//if it is going down, we need to add 1 to the panel number because we want to trigger the next panel
-          var panelNumber = Math.round(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
+          var panelNumber = Math.ceil(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
       }else{
           //console.log("up")
           scrollTop = newScrollTop//set the scroller place to its new placement
-          var panelNumber = Math.round(scrollTop/panelSize)//therefore which panel we are on is the scroller's place divided by panel height
+          var panelNumber = Math.floor(scrollTop/panelSize)//therefore which panel we are on is the scroller's place divided by panel height
       }
       
       if(panel!=panelNumber){//if this panel number has changed
