@@ -528,11 +528,17 @@ function render(){
       if(scrollTop<newScrollTop){//if the new value is smaller, then it is scrolling down
           scrollTop = newScrollTop//set the scroller place to its new placement
           //console.log("down")//if it is going down, we need to add 1 to the panel number because we want to trigger the next panel
-          var panelNumber = Math.ceil(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
+          var panelNumber = Math.round(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
+		  		  //
+		   d3.selectAll(".panel").style("opacity",.2)
+		   d3.select("#panel_"+(panelNumber-1)).style("opacity",1)
       }else{
           //console.log("up")
           scrollTop = newScrollTop//set the scroller place to its new placement
-          var panelNumber = Math.floor(scrollTop/panelSize)//therefore which panel we are on is the scroller's place divided by panel height
+          var panelNumber = Math.round(scrollTop/panelSize)+1//therefore which panel we are on is the scroller's place divided by panel height
+		  		  //
+		  d3.selectAll(".panel").style("opacity",.2)
+		  d3.select("#panel_"+(panelNumber-1)).style("opacity",1)
       }
       
       if(panel!=panelNumber){//if this panel number has changed
@@ -542,8 +548,6 @@ function render(){
 		  //transitionLinks(panel)
 		   transitionDotGrid(panel)
 		  
-		  d3.selectAll(".panel").style("opacity",.2)
-		  d3.select("#panel_"+(panel-1)).style("opacity",1)
        //   listOfStepFunctions[panel]()//do the function that is associated with that panel number, we add the () to the end of the name to trigger the function
       }
 	  // if(panel==1){
