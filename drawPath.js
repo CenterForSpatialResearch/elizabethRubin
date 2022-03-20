@@ -31,15 +31,13 @@ var newScrollTop = 0
 
 var svg = d3.select("#network").append("svg").attr("width",width).attr("height",height)
   
-Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv"),
-d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQMSyCudIYex0AqELLeyFVwRcwZrvDrXsxCX9IjYlAN-HqIlfvuCq1Pym3S9PDAfhiRDUS66ilz_apU/pub?gid=0&single=true&output=csv"),
-d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQMSyCudIYex0AqELLeyFVwRcwZrvDrXsxCX9IjYlAN-HqIlfvuCq1Pym3S9PDAfhiRDUS66ilz_apU/pub?gid=91574573&single=true&output=csv")])
+Promise.all([d3.csv("network_data_nodes.csv"),d3.csv("network_data_links.csv")])
     .then(function(data){
 	//	console.log(data[0])
 		//console.log(data[3])
-	 nodeCoordsDictionary = nodeDictionary(data[2])
-	  links = data[3]
-		linkData = data[3]
+	 nodeCoordsDictionary = nodeDictionary(data[0])
+	  links = data[1]
+		linkData = data[1]
 		
 	  drawLinks(links,nodeCoordsDictionary)
 	   nodeData =data[0]
