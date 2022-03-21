@@ -36,7 +36,7 @@ function makeChapters(data){
 			location:{
 				//center:[34,-73],
 				center:[parseFloat(place.lng),parseFloat(place.lat)],
-				zoom:place.zoom,
+				zoom:place.zoom-4,
 				pitch:0,
 				bearing:0
 			}
