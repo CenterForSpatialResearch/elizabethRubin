@@ -28,20 +28,26 @@ function makeChapters(data){
 	var chapters = []
 	for(var i in data){
 		var place = data[i]
-		var chapter = {
-			id:"chapter_"+i,
-			alignment:"left",
-			title:place.name,
-			description:place.notes,
-			location:{
-				//center:[34,-73],
-				center:[parseFloat(place.lng),parseFloat(place.lat)],
-				zoom:place.zoom-4,
-				pitch:0,
-				bearing:0
+		if(place.name!=undefined){
+			var chapter = {
+				id:"chapter_"+i,
+				alignment:"left",
+				title:place.name,
+				description:place.notes,
+				location:{
+					//center:[34,-73],
+					center:[parseFloat(place.lng),parseFloat(place.lat)],
+					zoom:place.zoom-2,
+					pitch:0,
+					bearing:0
+				},
+
+					onChapterEnter:[],
+					onChapterExit:[]
 			}
+			chapters.push(chapter)
 		}
-		chapters.push(chapter)
+	
 	}
 	//console.log(chapters)
 	return chapters
@@ -54,38 +60,111 @@ function addPath(data){
 		coordinates.push([parseFloat(data[i].lng),parseFloat(data[i].lat)])
 		}
 	}
-	console.log(coordinates)
+//	console.log(coordinates)
 	
 	map.on('load', () => {
-	map.addSource('route', {
-	'type': 'geojson',
-	'data': {
-	'type': 'Feature',
-	'properties': {},
-	'geometry': {
-	'type': 'LineString',
-	'coordinates': coordinates
-	}
-	}
-	});
-	map.addLayer({
-	'id': 'route',
-	'type': 'line',
-	'source': 'route',
-	'layout': {
-	'line-join': 'round',
-	'line-cap': 'round'
-	},
-	'paint': {
-	'line-color': 'red',
-		'line-width': 3
-	}
-	});
-	});
+		
+			map.addSource('route', {
+			'type': 'geojson',
+				'data': {
+					'type': 'Feature',
+					'properties': {},
+					'geometry': {
+						'type': 'LineString',
+						'coordinates': coordinates
+					}
+				}
+			});
+			map.addLayer({
+				'id': 'route',
+				'type': 'line',
+				'source': 'route',
+				'layout': {
+					'line-join': 'round',
+					'line-cap': 'round'
+				},
+				'paint': {
+					'line-color': '#00aeef',
+					'line-width': 2
+				}
+			},"admin");
+	
+			var symbolDictionary = {
+				house:"triangle",
+				office:"square",
+				park:"circle",
+				armybase:"hexagon",
+				airport:"hexagon",
+				city:"star",
+				country:"star"
+			}
+	
+		 for(var i in data){
+	 		if(data[i].name!=undefined){
 	
 	
+	 			var title = data[i].name
+	 			var index = i
+	 			var coordinate = [parseFloat(data[i].lng),parseFloat(data[i].lat)]
+	 			const el = document.createElement('div');
+	 			  //el.className = symbolDictionary[data[i].type];
+				  var type = symbolDictionary[data[i].type]
+				  console.log(type)
+
+				  
+	 			  el.className = type+" icon"
+				  
+				d3.select("."+type).attr("background-image","url('icons/"+type+".png')")
+				  
+	 			  //console.log(data[i].type,symbolDictionary[data[i].type])
+	 			  // make a marker for each feature and add to the map
+	 			  new mapboxgl.Marker(el).setLngLat(coordinate).addTo(map);
+	
+	 			//addMarker(map,title,index, marker)
+	 		}
+	
+	 	}
+	});	
 }
 
+function addMarker(map,title,index, marker){
+	map.addSource('points_'+index, {
+	'type': 'geojson',
+		'data': {
+			'type': 'FeatureCollection',
+			'features': [
+				{
+					// feature for Mapbox DC
+					'type': 'Feature',
+					'geometry': {
+					'type': 'Point',
+					'coordinates': [-77.03238901390978, 38.913188059745586]
+					},
+					'properties': {
+						'title': title
+					}
+				}
+			]
+		}
+	});
+	
+	map.addLayer({
+		'id': 'points',
+		'type': 'symbol',
+		'source': 'points',
+		'layout': {
+			'icon-image': marker,
+			'text-field': ['get', 'title'],
+			'text-font': [
+			'Open Sans Semibold',
+			'Arial Unicode MS Bold'
+			],
+			'text-offset': [0, 1.25],
+			'text-anchor': 'top'
+		}
+	});
+	
+}
 
 function configMap(config){
 	console.log(config)
@@ -223,6 +302,7 @@ function configMap(config){
 	    style: config.style,
 	    center: config.chapters[0].location.center,
 	    zoom: config.chapters[0].location.zoom,	    //
+		
 	    bearing: config.chapters[0].location.bearing,
 	    pitch: config.chapters[0].location.pitch,
 	    interactive: false,
@@ -270,6 +350,7 @@ function configMap(config){
 	    })
 	    .onStepEnter(response => {
 	        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+			console.log(chapter)
 	        response.element.classList.add('active');
 	        map[chapter.mapAnimation || 'flyTo'](chapter.location);
 
