@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display navigation directions</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
+	
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+<div id="map"></div>
+ 
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYzRzci1nc2FwcCIsImEiOiJja2J0ajRtNzMwOHBnMnNvNnM3Ymw5MnJzIn0.fsTNczOFZG8Ik3EtO9LdNQ';
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+	          center: [69.1,34.517],
+zoom: 13
+});
+ 
+ var directions = new MapboxDirections({
+	 accessToken: mapboxgl.accessToken,
+	steps:true
+ })
+ 
+ directions.on('route', function (ev) {
+	 var coordinates = []
+	 var legs = ev.route[0]["legs"][0]["steps"]
+	 for(var i in legs){
+	 	var intersections = legs[i]["intersections"]
+		 for(var j in intersections){
+		 	var coords = intersections[j]["location"]
+			 //console.log(coords)
+			 var lat = coords[1]
+			 var lng = coords[0]
+			 coordinates.push(["coords",lng,lat])
+		 }
+	 }
+	 
+	 
+	 console.log(coordinates)
+	 download(coordinates, "test.txt", "json")
+ })
+ 
+ function download(content, fileName, contentType) {
+     var a = document.createElement("a");
+     var file = new Blob([content], {type: contentType});
+     a.href = URL.createObjectURL(file);
+     a.download = fileName;
+     a.click();
+ }
+ 
+ 
+ 
+ map.addControl(directions, 'top-right');
+ 
+
+map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+}), "top-right");
+
+map.on("load",function(){
+console.log(map.getStyle().layers)
+	
+})
+
+
+</script>
+ 
+</body>
+</html>

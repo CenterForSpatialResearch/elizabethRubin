@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Last Exit Kabul Basemap 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+ <script src="https://d3js.org/d3.v6.min.js"></script>
+ <!-- <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script> -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+ <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+
+<script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.1.1/polyline.js></script>
+
+ <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">   <style>
+      body {
+        margin: 0;
+        padding: 0;
+		font-family:"Roboto", sans-serif;
+      }
+	  #header{
+		  width:100%;
+		  height:100px;
+		  position:fixed;
+		  top:0px;
+		  left:0px;
+		  border-bottom:1px solid black;
+		  background-color:rgba(255,255,255,1);
+		  z-index:2;
+	  }
+	  #title{
+		  font-size:36px;
+		  font-weight:100;
+		  padding:20px;
+		  letter-spacing:2px;
+	  }
+      #map {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+		z-index:-1;
+      }
+	  #sidePanel{
+		  min-height:100%;
+		  width:500px;
+		  position:absolute;
+		  left:0%;
+		  top:0%;
+		  background-color:rgba(255,255,255,.8);
+		  z-index:5;
+		  border:1px solid black;
+		  visibility:hidden;
+	  }
+	  #rollover{
+		  padding:20px;
+		  font-weight:100;
+	  }
+	  .airport{
+          background-image: url('icons/noun-airport-733239.png');
+          background-size: cover;
+          width: 50px;
+          height: 50px;
+	  }
+	  .office{
+          background-image: url('icons/noun-hotel-1698208.png');
+          background-size: cover;
+          width: 50px;
+          height: 50px;
+	  }
+		  .house{
+	          background-image: url('icons/noun-home-4775317.png');
+	          background-size: cover;
+	          width: 50px;
+	          height: 50px;
+		  }
+      .marker {
+        background-image: url('icons/noun-home-4775317.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
+      .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+      }
+	  
+	  #rolloverTitle{
+		  font-size:18px;
+		  display:inline-block;
+	  }
+	  #rolloverIcon{
+		  display:inline-block;
+	  }
+	  #framesMenu{
+		  height:200px;
+		  position:fixed;
+		  top:0px;
+		  right:0px;
+		  z-index:2;
+		  padding:5px;
+	  }
+	  .framesMenu{
+		  padding:5px;
+		  width:150px;
+		  height:20px;
+		  border:1px solid black;
+		  margin:5px;
+		  background-color:rgba(255,255,255,.5);
+	  }
+    </style>
+  </head>
+  <body>
+	  <script src="route_test.js"></script>
+<!--	  <div id="header">
+	  </div> -->
+	  <div id="sidePanel">
+	  	<!-- <div id="title">Last <br>Exit <br>Kabul: <br>Basemap 1</div> -->
+	  	<div id="rollover">
+			<div id="closeSidePanel"></div>
+			<div id="rolloverIcon"><img src="icons/marker.png" height="20"></div>
+			<div id="rolloverTitle">Title</div>
+			<div id="rolloverText">	text here </div>
+			<div id="rolloverImages">images here</div>
+		
+		</div>
+	  </div>
+	  <div id="framesMenu">
+		  Zoom to:
+	  	<div id="all" class="framesMenu">Gayhour's Path</div>
+	  	<div id="kabul" class="framesMenu">Kabul</div>
+	  	<div id="mazar" class="framesMenu">Mazar-i-Sharif</div>
+	  </div>
+    <div id="map"></div>
+
+    <script>
+		console.log(route1)
+		
+		Promise.all([d3.csv("rubin test - places (1).csv")])
+		.then(function(data){
+			var markerData = data[0]
+			console.log(markerData)
+			//console.log(markerData)
+			var markers = []
+			for(var i in markerData){
+				var pointData = markerData[i]
+				if(pointData["name"]!=undefined){
+					var lat = parseFloat(pointData["lat"])
+					var lng = parseFloat(pointData["lng"])
+					var description = pointData["notes"]
+					var markerName = pointData["name"]
+					var type = pointData["type"]
+				
+				
+					var marker = {}
+					marker["type"]="Feature"
+					marker["geometry"]={}
+					marker["geometry"]["type"]="Point"
+					marker["geometry"]["coordinates"]=[lng,lat]
+					marker["properties"]={}
+					marker["properties"]["title"]=markerName
+					marker["properties"]["description"]=description
+					marker["properties"]["icon"]="rocket-15"
+					marker["properties"]["files"]=pointData["filenames"]
+				
+					markers.push(marker)
+				}
+				
+			}
+			console.log(markers)
+			
+			var markersGeojson = {type:"FeatureCollection","features":markers}
+			
+			drawMap(markersGeojson)
+			
+			
+		})
+		
+		
+		function drawMap(markersGeojson){
+			console.log(route1)
+	        mapboxgl.accessToken = 'pk.eyJ1IjoiYzRzci1nc2FwcCIsImEiOiJja2J0ajRtNzMwOHBnMnNvNnM3Ymw5MnJzIn0.fsTNczOFZG8Ik3EtO9LdNQ';
+
+			// 	        const geojson = {
+			// 	          'type': 'FeatureCollection',
+			// 	          'features': markers
+			// 	        };
+			// console.log(geojson.features)
+
+	        var map = new mapboxgl.Map({
+	          container: 'map',
+	        //  style: 'mapbox://styles/c4sr-gsapp/cl28ue05y000216l4xot8ilbs',
+			 style:"mapbox://styles/c4sr-gsapp/cl29siy3l001k14t1nwox08qc",
+	          center: [69.18,34.53],
+	          zoom: 12
+	        });
+  
+  		  //console.log(markersGeojson)
+		    map.loadImage('icons/marker.png', function(error, res) {
+		       map.addImage("test", res)
+		     })
+  //
+			
+			map.on("load", () => {
+				
+				
+				map.addSource("markers",{
+					"type":"geojson",
+					"data":markersGeojson
+				})
+				
+				map.addLayer({
+				'id': 'places',
+				'type': 'symbol',
+				'source': 'markers',
+				'layout': {
+					'icon-image': "test",
+					'icon-allow-overlap': true,
+					'text-field': ['get', 'title'],
+					'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+					'text-radial-offset': 3,
+					"text-size":14,
+					'text-allow-overlap':true
+				},
+				'paint':{
+					"text-opacity":{
+									'base': 1,
+									'stops': [
+									[12, 0],
+									[13, 1]
+									]
+									}
+					//'text-justify': 'auto',
+					//'text-allow-overlap': false,
+					
+				}
+				});
+				
+			
+				map.on('click', 'places', (e) => {
+					var feature = e.features[0]
+					//console.log(feature)
+					d3.select("#rolloverTitle").html(feature.properties.title)
+					d3.select("#rolloverText").html(feature.properties.description)
+					var imageList = feature.properties["files"].replace("[","").replace("]","").split(",")
+					var imageString = ""
+					for(var im in imageList){
+						var imageURL = "images/used/"+imageList[im]
+						var imageLink = "<img src=\""+imageURL+"\" width=\"380\">"
+						imageString+=imageURL+" <br>"
+					}
+					//console.log(imageList)
+					 d3.select("#rolloverImages").html(imageString)
+					
+					d3.select("#sidePanel").style("visibility","visible")
+		  		  
+				
+				})
+				
+				
+				
+				
+				map.addSource('route', {
+				'type': 'geojson',
+				'data': {
+					'type': 'Feature',
+					'properties': {},
+						'geometry': {
+							'type': 'LineString',
+							'coordinates': routes
+						}
+					}
+				})
+				
+		 map.addLayer({
+ 					'id': 'route1',
+ 					'type': 'line',
+ 					'source': 'route',
+ 					'layout': {
+ 						// 'line-join': 'round',
+ 	// 					'line-cap': 'round'
+ 					},
+ 					'paint': {
+ 						'line-color': '#ff0000',
+ 						'line-width': 1
+ 					}
+ 				});
+			//	console.log(map.getStyle().layers)
+				//addAnimatedLine(map,routes)
+			})
+		
+		
+			d3.select("#all")
+			.on("click",function(){
+				const bounds = new mapboxgl.LngLatBounds([69.216402,34.58847],[67.207978,36.712097]);
+				map.fitBounds(bounds, {padding: 100});
+			})
+			
+			d3.select("#kabul")
+			.on("click",function(){
+				const bounds = new mapboxgl.LngLatBounds([69.216402,34.58847],[69.154135,34.540864]);
+				map.fitBounds(bounds, {padding: 100});
+			})
+			
+			d3.select("#mazar")
+			.on("click",function(){
+				const bounds = new mapboxgl.LngLatBounds([67.089031,36.715003],[67.207978,36.712097]);
+				map.fitBounds(bounds, {padding: 100});
+			})
+		
+		}	
+		
+		function addAnimatedLine(map,data){
+			const speedFactor = 30; // number of frames per longitude degree
+			let animation; // to store and cancel the animation
+			let startTime = 0;
+			let progress = 0; // progress = timestamp - startTime
+			let resetTime = false; // indicator of whether time reset is needed for the animation
+			
+			const geojson = {
+			'type': 'FeatureCollection',
+			'features': [
+			{
+			'type': 'Feature',
+			'geometry': {
+			'type': 'LineString',
+			'coordinates': [data[0],data[1]]
+			}
+			}
+			]
+			};
+ 
+			map.addSource('line', {
+			'type': 'geojson',
+			'data': geojson
+			});
+ 
+			// add the line which will be modified in the animation
+			map.addLayer({
+			'id': 'line-animation',
+			'type': 'line',
+			'source': 'line',
+			'layout': {
+			'line-cap': 'round',
+			'line-join': 'round'
+			},
+			'paint': {
+			'line-color': '#000000',
+			'line-width': 2,
+			'line-opacity': 1
+			}
+			});
+			
+			
+			startTime = performance.now();
+ 		   
+		   var coordsIndex = 1
+			console.log([data[0][0],data[0][1]])
+			const bounds = new mapboxgl.LngLatBounds(
+			[data[0][0],data[0][1]],
+				[data[0][0],data[0][1]]
+			
+				
+			);
+ 
+			// Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+			// for (const coord of coordinates) {
+	// 		bounds.extend(coord);
+	// 		}
+			//animateLine();
+			setInterval(function() {
+				geojson.features[0].geometry.coordinates.push(data[coordsIndex])
+				map.getSource('line').setData(geojson);
+				coordsIndex +=1
+				//if(coordsIndex%1==0){
+					bounds.extend(data[coordsIndex]);
+					map.fitBounds(bounds, {
+					padding: 100
+					});
+					//}
+				
+				
+			}, 10);
+			
+			
+			// for(var i in data){
+// 				console.log(data[i])
+// 				geojson.features[0].geometry.coordinates.push(data[i])
+// 				map.getSource('line').setData(geojson);
+//
+// 			}
+			
+			// function animateLine(timestamp) {
+//
+// 			// then update the map
+// 				map.getSource('line').setData(geojson);
+//
+// 			}
+ 
+ 
+		}
+		
+     
+    </script>
+  </body>
+</html>
