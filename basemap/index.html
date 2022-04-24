@@ -203,8 +203,8 @@
 	          container: 'map',
 	        //  style: 'mapbox://styles/c4sr-gsapp/cl28ue05y000216l4xot8ilbs',
 			 style:"mapbox://styles/c4sr-gsapp/cl29siy3l001k14t1nwox08qc",
-	          center: [69.18,34.53],
-	          zoom: 12
+	          center: [69.216402,34.58847],
+	          zoom: 16
 	        });
   
   		  //console.log(markersGeojson)
@@ -259,7 +259,7 @@
 					for(var im in imageList){
 						var imageURL = "images/used/"+imageList[im]
 						var imageLink = "<img src=\""+imageURL+"\" width=\"380\">"
-						imageString+=imageURL+" <br>"
+						imageString+=imageLink+" <br>"
 					}
 					//console.log(imageList)
 					 d3.select("#rolloverImages").html(imageString)
@@ -310,14 +310,14 @@
 			
 			d3.select("#kabul")
 			.on("click",function(){
-				const bounds = new mapboxgl.LngLatBounds([69.216402,34.58847],[69.154135,34.540864]);
-				map.fitBounds(bounds, {padding: 100});
+				const bounds = new mapboxgl.LngLatBounds([69.216402,34.59],[69.154135,34.52]);
+				map.fitBounds(bounds, {padding: 300});
 			})
 			
 			d3.select("#mazar")
 			.on("click",function(){
 				const bounds = new mapboxgl.LngLatBounds([67.089031,36.715003],[67.207978,36.712097]);
-				map.fitBounds(bounds, {padding: 100});
+				map.fitBounds(bounds, {padding: 250});
 			})
 		
 		}	
