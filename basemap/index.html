@@ -127,7 +127,7 @@
 	  <script src="route_test.js"></script>
 <!--	  <div id="header">
 	  </div> -->
-	  <div id="title">Basemap 1</div>
+	  <div id="title">Basemap</div>
 	  <div id="sidePanel">
 	  	<div id="rollover">
 			<div id="closeSidePanel"></div>
@@ -231,8 +231,8 @@
 					'icon-image': "test",
 					'icon-allow-overlap': true,
 					'text-field': ['get', 'title'],
-					'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
-					'text-radial-offset': 3,
+					'text-variable-anchor': ['left', 'right'],
+					'text-radial-offset': 1,
 					"text-size":14,
 					'text-allow-overlap':true
 				},
@@ -240,8 +240,8 @@
 					"text-opacity":{
 									'base': 1,
 									'stops': [
-									[12, 0],
-									[13, 1]
+									[11, 0],
+									[12, 1]
 									]
 									}
 					//'text-justify': 'auto',
@@ -370,12 +370,8 @@
  		   
 		   var coordsIndex = 1
 			console.log([data[0][0],data[0][1]])
-			const bounds = new mapboxgl.LngLatBounds(
-			[data[0][0],data[0][1]],
-				[data[0][0],data[0][1]]
-			
-				
-			);
+			const bounds = new mapboxgl.LngLatBounds([data[0][0],data[0][1]],[data[0][0],data[0][1]]);
+			console.log(bounds)
  
 			// Extend the 'LngLatBounds' to include every coordinate in the bounds result.
 			// for (const coord of coordinates) {
@@ -387,7 +383,12 @@
 				map.getSource('line').setData(geojson);
 				coordsIndex +=1
 				//if(coordsIndex%1==0){
-					bounds.extend(data[coordsIndex]);
+					//bounds.extend(data[coordsIndex]);
+					
+					coords.push(data[coordsIndex]).shift()
+					//const bounds = new mapboxgl.LngLatBounds(coords);
+					
+					
 					map.fitBounds(bounds, {
 					padding: 100
 					});
