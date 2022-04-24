@@ -119,6 +119,7 @@
 		  border:1px solid black;
 		  margin:5px;
 		  background-color:rgba(255,255,255,.5);
+		  cursor:pointer;
 	  }
     </style>
   </head>
@@ -126,8 +127,8 @@
 	  <script src="route_test.js"></script>
 <!--	  <div id="header">
 	  </div> -->
+	  <div id="title">Basemap 1</div>
 	  <div id="sidePanel">
-	  	<!-- <div id="title">Last <br>Exit <br>Kabul: <br>Basemap 1</div> -->
 	  	<div id="rollover">
 			<div id="closeSidePanel"></div>
 			<div id="rolloverIcon"><img src="icons/marker.png" height="20"></div>
@@ -206,7 +207,8 @@
 	          center: [69.216402,34.58847],
 	          zoom: 16
 	        });
-  
+			const bounds = new mapboxgl.LngLatBounds([69.216402,34.59],[69.154135,34.52]);
+			map.fitBounds(bounds, {padding: 250});
   		  //console.log(markersGeojson)
 		    map.loadImage('icons/marker.png', function(error, res) {
 		       map.addImage("test", res)
