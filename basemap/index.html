@@ -54,7 +54,7 @@
 		  position:absolute;
 		  left:0%;
 		  top:0%;
-		  background-color:rgba(255,255,255,.8);
+		  background-color:rgba(255,255,255,1);
 		  z-index:5;
 		  border:1px solid black;
 		  visibility:hidden;
@@ -121,6 +121,10 @@
 		  background-color:rgba(255,255,255,.5);
 		  cursor:pointer;
 	  }
+	  #closeSidePanel{
+		  text-align:right;
+		  cursor:pointer;
+	  }
     </style>
   </head>
   <body>
@@ -130,11 +134,11 @@
 	  <div id="title">Basemap</div>
 	  <div id="sidePanel">
 	  	<div id="rollover">
-			<div id="closeSidePanel"></div>
+			<div id="closeSidePanel">X</div>
 			<div id="rolloverIcon"><img src="icons/marker.png" height="20"></div>
 			<div id="rolloverTitle">Title</div>
-			<div id="rolloverText">	text here </div>
-			<div id="rolloverImages">images here</div>
+			<div id="rolloverText">	text </div>
+			<div id="rolloverImages"></div>
 		
 		</div>
 	  </div>
@@ -147,12 +151,12 @@
     <div id="map"></div>
 
     <script>
-		console.log(route1)
+		//console.log(route1)
 		
 		Promise.all([d3.csv("rubin test - places (1).csv")])
 		.then(function(data){
 			var markerData = data[0]
-			console.log(markerData)
+			//console.log(markerData)
 			//console.log(markerData)
 			var markers = []
 			for(var i in markerData){
@@ -180,7 +184,7 @@
 				}
 				
 			}
-			console.log(markers)
+			//console.log(markers)
 			
 			var markersGeojson = {type:"FeatureCollection","features":markers}
 			
@@ -202,9 +206,10 @@
 
 	        var map = new mapboxgl.Map({
 	          container: 'map',
-	        //  style: 'mapbox://styles/c4sr-gsapp/cl28ue05y000216l4xot8ilbs',
-			 style:"mapbox://styles/c4sr-gsapp/cl29siy3l001k14t1nwox08qc",
-	          center: [69.216402,34.58847],
+	        //  style: 'mapbox://styles/c4sr-gsapp/cl28ue05y000216l4xot8ilbs',//light
+			 style:"mapbox://styles/c4sr-gsapp/cl29siy3l001k14t1nwox08qc",//plain
+	        // style:"mapbox://styles/c4sr-gsapp/cl2d8lfl1000e14lkb2wcs809",//dark
+			 center: [69.216402,34.58847],
 	          zoom: 16
 	        });
 			const bounds = new mapboxgl.LngLatBounds([69.216402,34.59],[69.154135,34.52]);
@@ -237,6 +242,7 @@
 					'text-allow-overlap':true
 				},
 				'paint':{
+					"text-color":"#ffffff",
 					"text-opacity":{
 									'base': 1,
 									'stops': [
@@ -258,18 +264,25 @@
 					d3.select("#rolloverText").html(feature.properties.description)
 					var imageList = feature.properties["files"].replace("[","").replace("]","").split(",")
 					var imageString = ""
-					for(var im in imageList){
-						var imageURL = "images/used/"+imageList[im]
-						var imageLink = "<img src=\""+imageURL+"\" width=\"380\">"
-						imageString+=imageLink+" <br>"
+					console.log(imageList)
+					if(imageList.length>1){
+						for(var im in imageList){
+							var imageURL = "images/used/"+imageList[im]
+							var imageLink = "<img src=\""+imageURL+"\" width=\"380\">"
+							imageString+=imageLink+" <br>"
+						}
+						console.log(imageString)
+						 d3.select("#rolloverImages").html(imageString)
+					}else{
+						 d3.select("#rolloverImages").html("")
 					}
-					//console.log(imageList)
-					 d3.select("#rolloverImages").html(imageString)
+					
 					
 					d3.select("#sidePanel").style("visibility","visible")
 		  		  
 				
 				})
+				d3.select("#closeSidePanel").on("click",function(){d3.select("#sidePanel").style("visibility","hidden")})
 				
 				
 				
@@ -368,10 +381,10 @@
 			
 			startTime = performance.now();
  		   
-		   var coordsIndex = 1
-			console.log([data[0][0],data[0][1]])
+		    var coordsIndex = 1
+			//console.log([data[0][0],data[0][1]])
 			const bounds = new mapboxgl.LngLatBounds([data[0][0],data[0][1]],[data[0][0],data[0][1]]);
-			console.log(bounds)
+			//console.log(bounds)
  
 			// Extend the 'LngLatBounds' to include every coordinate in the bounds result.
 			// for (const coord of coordinates) {
